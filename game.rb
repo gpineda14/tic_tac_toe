@@ -7,6 +7,7 @@ class Game
     @player1 = Player.new(player1, "X")
     @player2 = Player.new(player2, "O")
     @gameOver = false
+    @players_turn = @player1
     @outcome = ""
   end
 
@@ -16,15 +17,21 @@ class Game
     puts @board.board
     puts "Each letter indicates a move"
     until @gameOver || moves > 9
-      prompt_user(@player1)
-      puts @board.board
-      moves += 1
-      prompt_user(@player2)
+      prompt_user(@players_turn)
       puts @board.board
       is_game_over
       moves += 1
+      next_player
     end
     announce_outcome(@outcome)
+  end
+
+  def next_player
+    if @players_turn == @player1
+      @players_turn = @player2
+    else
+      @players_turn = @player1
+    end
   end
 
   def prompt_user(player)
