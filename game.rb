@@ -1,7 +1,7 @@
 class Game
   require './player.rb'
   require './board.rb'
-  attr_accessor :board, :player1, :player2
+  attr_accessor :board, :player1, :player2, :gameOver
   def initialize(player1="player1", player2="player2")
     @board = Board.new
     @player1 = Player.new(player1, "X")
@@ -64,7 +64,7 @@ class Game
   end
 
   def announce_outcome(outcome)
-    if @outcome == ""
+    if outcome == ""
       puts "It's a tie!"
     else
       puts outcome[0] == @player1.char ? "#{@player1.name} is the winner!": "#{@player2.name} is the winner!"
